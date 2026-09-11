@@ -22,6 +22,8 @@
     --muted: #6B6255;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;}
+  img{-webkit-user-drag:none; pointer-events:none;}
   body{
     background:var(--papel);
     color:var(--tinta);
@@ -805,10 +807,19 @@
 
 </div>
 
-<div class="print-btn-wrap">
-  <button class="print-btn" onclick="window.print()">Imprimir / Guardar como PDF</button>
-  <div class="print-hint">Para conservar los colores de fondo, activa la opción "Gráficos de fondo" en el diálogo de impresión.</div>
-</div>
 
+<script>
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('copy', function(e){ e.preventDefault(); });
+document.addEventListener('cut', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+document.addEventListener('keydown', function(e){
+  var k = e.key ? e.key.toLowerCase() : '';
+  if (e.key === 'F12') e.preventDefault();
+  if ((e.ctrlKey || e.metaKey) && ['s','u','p'].includes(k)) e.preventDefault();
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(k)) e.preventDefault();
+});
+</script>
 </body>
 </html>

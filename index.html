@@ -12,6 +12,8 @@
     --dorado: #C99A3E; --papel: #FBF7F0; --tinta: #2B2620; --muted: #6B6255;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body{-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;}
+  img{-webkit-user-drag:none; pointer-events:none;}
   body { font-family: 'Work Sans', sans-serif; background: var(--papel); color: var(--tinta); }
   .top-bar {
     background: var(--azul-oscuro); color: #fff; display: flex; justify-content: space-between;
@@ -191,5 +193,18 @@
     </div>
   </footer>
 
+<script>
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('copy', function(e){ e.preventDefault(); });
+document.addEventListener('cut', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+document.addEventListener('keydown', function(e){
+  var k = e.key ? e.key.toLowerCase() : '';
+  if (e.key === 'F12') e.preventDefault();
+  if ((e.ctrlKey || e.metaKey) && ['s','u','p'].includes(k)) e.preventDefault();
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(k)) e.preventDefault();
+});
+</script>
 </body>
 </html>
